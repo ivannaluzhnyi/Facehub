@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMessages extends Migration
+class CreateComments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateTableMessages extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('message');
-
             $table->timestamps();
+            $table->string('username');
+            $table->string('email');
+            $table->bigInteger('post_id')->unsigned();
+            $table->longText('content');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ class CreateTableMessages extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('comments');
     }
 }

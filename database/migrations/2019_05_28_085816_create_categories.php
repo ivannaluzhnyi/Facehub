@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIdAutorToMessages extends Migration
+class CreateCategories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddIdAutorToMessages extends Migration
      */
     public function up()
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->bigInteger('id_author')->nullable();
+        Schema::create('categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
+            $table->string('name');
+            $table->string('slug');
+            $table->integer('posts_count')->unsigned()->default(0);
         });
     }
 
@@ -25,8 +29,6 @@ class AddIdAutorToMessages extends Migration
      */
     public function down()
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->dropColumn('id_author');
-        });
+        Schema::dropIfExists('categories');
     }
 }
