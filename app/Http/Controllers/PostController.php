@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Comment;
-use App\Post;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Post;
 use App\User;
 
 class PostController extends Controller
