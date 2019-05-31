@@ -14,6 +14,9 @@
 @endsection
 
 @section("main")
+    <div class="alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+    </div>
     @foreach($posts as $post)
         <h2><a href="{{ route('posts.show', ['slug' => $post->slug]) }}">{{ $post->name }}</a></h2>
         <p>
