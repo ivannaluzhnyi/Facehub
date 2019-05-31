@@ -22,11 +22,6 @@
 </head>
 <body>
     <div id="app">
-
-        <nav class="navbar fixed-top navbar-light bg-light">
-            <a class="navbar-brand" href="#">Fixed top</a>
-        </nav>
-
         <nav class="navbar fixed-top navbar-dark bg-dark">
             <a class="navbar-brand" href="{{ url('/') }}">FaceHub</a>
 
@@ -107,8 +102,9 @@
                 </div>
             </div>
         </nav>
-zfsdfsdf
-        @yield('content')
+        <div class="content" style="margin-top: 30px">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
