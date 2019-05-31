@@ -50,15 +50,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $t = Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'date_of_birth' => ['required', 'string', 'max:255', 'unique:users'],
-            'avatar' => ['required','image','mimes:jpeg,png,jpg,gif,svg'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-        dd($t);
-
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -76,7 +67,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         dd($data);
 //            // Get image file
 //            $image = $request->file('avatar');
