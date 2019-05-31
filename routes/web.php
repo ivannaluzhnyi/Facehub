@@ -27,15 +27,21 @@ Route::get('/page/{param?}', function ($param = null) {
 
 });
 
-Auth::routes();
+//Auth::routes();
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', '\App\Http\Controllers\Auth\RegisterController@register');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/wall', 'WallController@index')->name('wall')->middleware('auth');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
 
 
-Route::get('/', 'PostController@index')->name('home');
+Route::get('/', 'PostController@index')->name('home')->middleware('auth');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
 Route::get('/category/{slug}', 'PostController@category')->name('posts.category')->where('slug', $slugPattern);
 Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id', '[0-9]+');

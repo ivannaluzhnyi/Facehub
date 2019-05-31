@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Traits\UploadTrait;
+use function Psy\debug;
 
 class RegisterController extends Controller
 {
@@ -48,9 +50,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $t = Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'date_of_birth' => ['required', 'string', 'max:255', 'unique:users'],
+            'avatar' => ['required','image','mimes:jpeg,png,jpg,gif,svg'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        dd($t);
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'date_of_birth' => ['required', 'string', 'max:255', 'unique:users'],
+            'avatar' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -63,9 +76,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        dd($data);
+//            // Get image file
+//            $image = $request->file('avatar');
+//            // Make a image name based on user name and current timestamp
+//            $name = str_slug($request->input('name')).'_'.time();
+//            // Define folder path
+//            $folder = '/uploads/images/';
+//            // Make a file path where image will be stored [ folder path + file name + file extension]
+//            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+//            $this->uploadOne($image, $folder, 'public', $name);
+
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'avatar' => '',
+            'date_of_birth' => $data['date_of_birth'],
             'password' => Hash::make($data['password']),
         ]);
     }
