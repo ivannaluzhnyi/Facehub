@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Traits\UploadTrait;
+use Illuminate\Http\Request;
 use function Psy\debug;
 
 class RegisterController extends Controller
@@ -22,7 +23,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
+    
     use RegistersUsers;
 
     /**
@@ -50,14 +51,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $t = Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'date_of_birth' => ['required', 'string', 'max:255', 'unique:users'],
-            'avatar' => ['required','image','mimes:jpeg,png,jpg,gif,svg'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-        dd($t);
 
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -74,10 +67,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $data)
     {
-
-        dd($data);
 //            // Get image file
 //            $image = $request->file('avatar');
 //            // Make a image name based on user name and current timestamp
