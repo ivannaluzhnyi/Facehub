@@ -34,7 +34,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', '\App\Http\Controllers\Auth\RegisterController@register');
+Route::post('register', '\App\Http\Controllers\Auth\RegisterController@create');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
