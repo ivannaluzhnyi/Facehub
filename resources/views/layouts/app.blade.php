@@ -103,6 +103,13 @@
             </div>
         </nav>
         <div class="content" style="margin-top: 30px">
+
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             @yield('content')
         </div>
     </div>

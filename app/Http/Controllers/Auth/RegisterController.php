@@ -6,9 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Traits\UploadTrait;
+use Intervention\Image\Facades\Image;
 use function Psy\debug;
 
 class RegisterController extends Controller
@@ -63,28 +64,45 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  Request  $request
      * @return \App\User
      */
     protected function create(Request $request)
     {
-//            // Get image file
-//            $image = $request->file('avatar');
-//            // Make a image name based on user name and current timestamp
-//            $name = str_slug($request->input('name')).'_'.time();
-//            // Define folder path
-//            $folder = '/uploads/images/';
-//            // Make a file path where image will be stored [ folder path + file name + file extension]
-//            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
-//            $this->uploadOne($image, $folder, 'public', $name);
+        $this->validator(array($request));
+//
+//
 
 
-        return User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'avatar' => '',
-            'date_of_birth' => $request['date_of_birth'],
-            'password' => Hash::make($request['password']),
-        ]);
+        $img_dir = '';
+        if($request->hasFile('avatar')){
+
+            $originalImage= $request->file('avatar');
+            $fileName = rand(1111,9999).time().'.'.$originalImage->getClientOriginalExtension();
+            $org_path = 'images/originals/' . $fileName;
+            $thm_path = 'images/thumbnails/' . $fileName;
+
+//            if (($org_img && $thm_img) == true) {
+                Image::make($originalImage->getRealPath())->fit(900, 500, function ($constraint) {
+                    $constraint->upsize();
+                })->save($org_path);
+
+                Image::make($originalImage->getRealPath())->fit(270, 160, function ($constraint) {
+                    $constraint->upsize();
+                })->save($thm_path);
+//            }
+
+            $img_dir = $fileName;
+        }
+
+         User::create([
+             'name' => $request['name'],
+             'email' => $request['email'],
+             'avatar' => $img_dir,
+             'date_of_birth' => $request['date_of_birth'],
+             'password' => Hash::make($request['password']),
+         ]);
+
+        return redirect()->back()->with(['status' => 'Utilisateur ajouté.']);
     }
 }
