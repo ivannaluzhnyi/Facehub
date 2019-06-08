@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Fri, 31 May 2019 13:47:50 +0000.
+ * Date: Fri, 31 May 2019 14:27:30 +0000.
  */
 
 namespace App\Models;
@@ -16,6 +16,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $category_id
  * @property int $user_id
  * @property string $name
+ * @property string $img
  * @property string $slug
  * @property string $content
  * @property \Carbon\Carbon $created_at
@@ -38,6 +39,7 @@ class Post extends Eloquent
 		'category_id',
 		'user_id',
 		'name',
+		'img',
 		'slug',
 		'content'
 	];
