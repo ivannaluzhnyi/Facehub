@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
-class ProfilController
+class SettingsController
 {
     public function index()
     {
