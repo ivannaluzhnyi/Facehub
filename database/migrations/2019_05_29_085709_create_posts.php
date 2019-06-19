@@ -18,6 +18,7 @@ class CreatePosts extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->string('name');
+            $table->string('img');
             $table->string('slug');
             $table->longText('content');
             $table->timestamps();

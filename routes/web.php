@@ -41,7 +41,7 @@ Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('au
 Route::post('/wall/write', 'WallController@write');
 
 
-Route::get('/', 'PostController@index')->name('home')->middleware('auth');
+Route::get('/', 'PostController@index')->name('home');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
 Route::get('/category/{slug}', 'PostController@category')->name('posts.category')->where('slug', $slugPattern);
 Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id', '[0-9]+');

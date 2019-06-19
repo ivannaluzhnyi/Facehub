@@ -1,12 +1,23 @@
-
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
+//fonts
+@import "fonts";
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    font-size: 15px;
+}
 
 .navbar-laravel {
   background-color: #fff;

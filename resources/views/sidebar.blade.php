@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     <div class="row">
-        <div class="col-sm-8">
-            @yield('main')
+        <div class="col-2">
+            test
         </div>
-        <div class="col-sm-4">
-            <!-- include('partials.sidebar') -->
+        <div class="col-8">
+            @yield('post')
+        </div>
+
+        <div class="col-2">
+            sqdqs
         </div>
     </div>
+</div>
 @endsection
