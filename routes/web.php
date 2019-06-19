@@ -39,7 +39,7 @@ Route::post('register', '\App\Http\Controllers\Auth\RegisterController@create');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
-
+Route::get('/settings', 'ProfilController@index');
 
 Route::get('/', 'PostController@index')->name('home');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
