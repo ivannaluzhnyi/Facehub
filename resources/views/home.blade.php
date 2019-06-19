@@ -1,11 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-2">
-                test
-            </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-2">
+            test
+        </div>
+
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">Poster un article</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    <div class="row">
+
+                        <div class="col-2 s2">
+                            <img src="images/thumbnails/{{Auth::user()->avatar }} " alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                        </div>
 
             <div class="col-8">
 
@@ -73,6 +90,14 @@
                                 <input type="file" class="custom-file-input" id="inputGroupFile01"
                                        aria-describedby="inputGroupFileAddon01">
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Upload one or more files">
                             </div>
                         </div>
 
