@@ -7,7 +7,15 @@
             test
         </div>
 
+
         <div class="col-8">
+
+            <div style="margin-top: 25px" class="card" >
+                <div class="card-body">
+                    Bienvenue {{Auth::user()->name}}
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">Poster un article</div>
 
@@ -19,48 +27,23 @@
                     @endif
 
                     <div class="row">
+                        <img  src="images/thumbnails/{{Auth::user()->avatar }} " class="col-2 rounded float-left img-thumbnail" style="height: 60px; width: 80px !important; padding: 0 !important" alt="... thumbnail">
 
-                        <div class="col-2 s2">
-                            <img src="images/thumbnails/{{Auth::user()->avatar }} " alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                        </div>
-
-            <div class="col-8">
-
-                <div style="margin-top: 25px" class="card" >
-                    <div class="card-body">
-                        Bienvenue {{Auth::user()->name}}
+                        <textarea data-toggle="modal" data-target="#addPostModal"  placeholder="Exprimez-vous, {{ Auth::user()->name  }}" style="margin: auto" class=" col-8 form-control" name="" id="" cols="30" rows="4"></textarea>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">Poster un article</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <div class="row">
-                            <img  src="images/thumbnails/{{Auth::user()->avatar }} " class="col-2 rounded float-left img-thumbnail" style="height: 60px; width: 80px !important; padding: 0 !important" alt="... thumbnail">
-
-                            <textarea data-toggle="modal" data-target="#addPostModal"  placeholder="Exprimez-vous, {{ Auth::user()->name  }}" style="margin: auto" class=" col-8 form-control" name="" id="" cols="30" rows="4"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 25px" class="card" >
-                    <div class="card-body">
-                        You are logged in!
-                    </div>
-                </div>
-
             </div>
 
-            <div class="col-2">
-                sqdqs
+            <div style="margin-top: 25px" class="card" >
+                <div class="card-body">
+                    You are logged in!
+                </div>
             </div>
+
+        </div>
+
+        <div class="col-2">
+            sqdqs
         </div>
     </div>
 
