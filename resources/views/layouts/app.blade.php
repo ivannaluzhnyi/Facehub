@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/navbar.css" rel="stylesheet">
+    @yield('stylesheets')
 
     <!-- Scripts -->
     <script>
@@ -25,10 +26,10 @@
 <body>
     <div id="app">
         <nav class="navbar fixed-top navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{ url('/') }}">FaceHub</a>
+            <a class="navbar-brand" href="{{ url('/home') }}">FaceHub</a>
 
             <div class="nav navbar-nav navbar-right">
-                <a href=""> Mon profil </a>
+                <a href="{{ url('/profil') }}"> Mon profil </a>
             </div>
 
             <ul class="nav navbar-nav navbar-right">

@@ -39,6 +39,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
 
+Route::get('/profil/{param?}', 'ProfilController@index')->name('profil');
 
 Route::get('/', 'PostController@index')->name('home');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
