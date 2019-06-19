@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/navbar.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -26,28 +27,30 @@
         <nav class="navbar fixed-top navbar-dark bg-dark">
             <a class="navbar-brand" href="{{ url('/') }}">FaceHub</a>
 
+            <div class="nav navbar-nav navbar-right">
+                <a href=""> Mon profil </a>
+            </div>
+
             <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
 
-                        <ul class="dropdown-menu" role="menu" style="padding: 0">
-                            <li class="justify-content-center">
-                                <a style="width: 100%" class="btn btn-secondary " href="{{ url('/logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
+                    <ul class="dropdown-menu" role="menu" style="padding: 0">
+                        <li class="justify-content-center">
+                            <a style="width: 100%" class="btn btn-secondary " href="{{ url('/logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
 
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-
-                    </li>
-
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 

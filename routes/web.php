@@ -24,7 +24,6 @@ Route::get('/hello', function () {
 
 Route::get('/page/{param?}', function ($param = null) {
     return view('page', ['word'=>$param]);
-
 });
 
 //Auth::routes();
