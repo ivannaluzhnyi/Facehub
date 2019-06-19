@@ -4,7 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-2">
-            test
+            <h3><a href="{{ url('/category') }}">Categories</a></h3>
+{{--            <a class="btn btn-outline-success" href="">Tout les categories</a>--}}
+            <ul>
+                <li>qdq</li>
+                <li>qdq</li>
+                <li>qdq</li>
+            </ul>
         </div>
 
         <div class="col-8">
@@ -19,10 +25,7 @@
                     @endif
 
                     <div class="row">
-
-                        <div class="col-2 s2">
-                            <img src="images/thumbnails/{{Auth::user()->avatar }} " alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                        </div>
+                        <img  src="images/thumbnails/{{Auth::user()->avatar }} " class="col-2 rounded float-left img-thumbnail" style="height: 60px; width: 80px !important; padding: 0 !important" alt="... thumbnail">
 
                         <textarea data-toggle="modal" data-target="#addPostModal"  placeholder="Exprimez-vous, {{ Auth::user()->name  }}" style="margin: auto" class=" col-8 form-control" name="" id="" cols="30" rows="4"></textarea>
 
@@ -37,6 +40,9 @@
                 <div class="card-body">
 
                     You are logged in!
+
+
+
 
 
 
@@ -68,16 +74,16 @@
                     <input placeholder="Titre" type="text" class="form-control" style="margin-bottom: 20px">
                     <textarea placeholder="Exprimez-vous, {{ Auth::user()->name  }}" name="" id="" rows="6" style="margin-bottom: 20px" class="form-control" required></textarea>
 
-
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>File</span>
-                                <input type="file" multiple>
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Upload one or more files">
-                            </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                         </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                   aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
