@@ -27,8 +27,9 @@
 
         <ul class="nav navbar-nav navbar-right">
             <!-- Authentication Links -->
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" >
                 @csrf
+
                 <div class="form-row align-items-center">
 
                     <div class="col-auto">
@@ -47,7 +48,7 @@
                     </div>
                     <div class="col-auto">
                         <label class="sr-only" for="inlineFormInput">Name</label>
-                        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Mot de pass">
+                        <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} mb-2" id="inlineFormInput" placeholder="Mot de pass" name="password" required>
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-2">Connexion</button>

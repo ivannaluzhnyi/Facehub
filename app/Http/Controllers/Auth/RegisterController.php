@@ -82,15 +82,13 @@ class RegisterController extends Controller
             $org_path = 'images/originals/' . $fileName;
             $thm_path = 'images/thumbnails/' . $fileName;
 
-//            if (($org_img && $thm_img) == true) {
-                Image::make($originalImage->getRealPath())->fit(900, 500, function ($constraint) {
-                    $constraint->upsize();
-                })->save($org_path);
+            Image::make($originalImage->getRealPath())->fit(900, 500, function ($constraint) {
+                $constraint->upsize();
+            })->save($org_path);
 
-                Image::make($originalImage->getRealPath())->fit(270, 160, function ($constraint) {
-                    $constraint->upsize();
-                })->save($thm_path);
-//            }
+            Image::make($originalImage->getRealPath())->fit(270, 160, function ($constraint) {
+                $constraint->upsize();
+            })->save($thm_path);
 
             $img_dir = $fileName;
         }
