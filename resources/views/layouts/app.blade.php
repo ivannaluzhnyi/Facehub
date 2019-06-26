@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
     <!-- CSRF Token -->
+    <script src="https://kit.fontawesome.com/62926dcf03.js"></script>
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -20,11 +20,13 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+    <script src="//cdn.ckeditor.com/4.11.4/full/ckeditor.js"></script>
 </head>
 <body>
     <div id="app">
         <nav class="navbar fixed-top navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{ url('/home') }}">FaceHub</a>
+            <a class="navbar-brand" href="{{ url('/') }}">FaceHub</a>
 
             <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -52,11 +54,23 @@
         </nav>
 
 
-        <div class="content" style="margin-top: 60px">
+        <div class="content container" style="margin-top: 60px">
 
-            @if (session('status'))
+            @if (session('status_success'))
                 @component('components.alert', ['type' => 'success'])
-                    {{ session('status') }}
+                    {{ session('status_success') }}
+                @endcomponent
+            @endif
+
+            @if (session('status_danger'))
+                @component('components.alert', ['type' => 'danger'])
+                    {{ session('status_danger') }}
+                @endcomponent
+            @endif
+
+            @if (session('status_info'))
+                @component('components.alert', ['type' => 'info'])
+                    {{ session('status_info') }}
                 @endcomponent
             @endif
 

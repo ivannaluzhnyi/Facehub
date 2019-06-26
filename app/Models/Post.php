@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Fri, 31 May 2019 14:27:30 +0000.
+ * Date: Tue, 25 Jun 2019 17:59:04 +0000.
  */
 
 namespace App\Models;
@@ -17,12 +17,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $user_id
  * @property string $name
  * @property string $img
- * @property string $slug
+ * @property int $slug_id
  * @property string $content
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\Category $category
+ * @property \App\Models\Slug $slug
  * @property \App\Models\User $user
  * @property \Illuminate\Database\Eloquent\Collection $comments
  *
@@ -32,7 +33,8 @@ class Post extends Eloquent
 {
 	protected $casts = [
 		'category_id' => 'int',
-		'user_id' => 'int'
+		'user_id' => 'int',
+		'slug_id' => 'int'
 	];
 
 	protected $fillable = [
@@ -40,13 +42,18 @@ class Post extends Eloquent
 		'user_id',
 		'name',
 		'img',
-		'slug',
+		'slug_id',
 		'content'
 	];
 
 	public function category()
 	{
 		return $this->belongsTo(\App\Models\Category::class);
+	}
+
+	public function slug()
+	{
+		return $this->belongsTo(\App\Models\Slug::class);
 	}
 
 	public function user()

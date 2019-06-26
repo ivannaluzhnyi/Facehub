@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Fri, 31 May 2019 14:27:30 +0000.
+ * Date: Tue, 25 Jun 2019 17:59:04 +0000.
  */
 
 namespace App\Models;
@@ -23,7 +23,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
+ * @property \Illuminate\Database\Eloquent\Collection $categories
  * @property \Illuminate\Database\Eloquent\Collection $posts
+ * @property \Illuminate\Database\Eloquent\Collection $slugs
  *
  * @package App\Models
  */
@@ -49,8 +51,18 @@ class User extends Eloquent
 		'remember_token'
 	];
 
+	public function categories()
+	{
+		return $this->hasMany(\App\Models\Category::class);
+	}
+
 	public function posts()
 	{
 		return $this->hasMany(\App\Models\Post::class);
+	}
+
+	public function slugs()
+	{
+		return $this->hasMany(\App\Models\Slug::class);
 	}
 }

@@ -29,8 +29,9 @@ Route::get('/page/{param?}', function ($param = null) {
 
 
 // Category
-Route::get('/category','CategoryController@index')->middleware('auth');
-Route::post('/category','CategoryController@create')->name('add_category');
+Route::get('/categories','CategoryController@index')->middleware('auth');
+Route::post('/categories','CategoryController@create')->middleware('auth')->name('categories');
+Route::get('/categories/delete/{id}', 'CategoryController@delete')->middleware('auth');
 
 //Auth::routes();
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -41,12 +42,12 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', '\App\Http\Controllers\Auth\RegisterController@create');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
 
 
-Route::get('/', 'PostController@index')->name('home');
+//Route::get('/', 'PostController@index')->name('home');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
 Route::get('/category/{slug}', 'PostController@category')->name('posts.category')->where('slug', $slugPattern);
 Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id', '[0-9]+');

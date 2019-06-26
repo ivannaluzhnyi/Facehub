@@ -4,12 +4,19 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-2">
-            <h3><a href="{{ url('/category') }}">Categories</a></h3>
+            <h3><a href="{{ url('/categories') }}">Categories</a></h3>
 {{--            <a class="btn btn-outline-success" href="">Tout les categories</a>--}}
             <ul>
-                <li>qdq</li>
-                <li>qdq</li>
-                <li>qdq</li>
+                @if(isset($categories))
+                    <?php  $limit = 0?>
+                    @foreach($categories as $category)
+                        @if($limit === 3) @break @endif
+                        <li>{{$category->name}}</li>
+                        <?php ++$limit ?>
+                    @endforeach
+                        <br>
+                        <a href="{{ url('/categories') }}"><small>Plus de categories...</small></a>
+                @endif
             </ul>
         </div>
 
@@ -57,6 +64,11 @@
 </div>
 @endsection
 
+<script>
+
+    CKEDITOR.replace( 'content' );
+</script>
+
 
 <div class="modal fade" id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -72,28 +84,41 @@
                 <div class="modal-body form-group ">
 
                     <input placeholder="Titre" type="text" class="form-control" style="margin-bottom: 20px">
-                    <textarea placeholder="Exprimez-vous, {{ Auth::user()->name  }}" name="" id="" rows="6" style="margin-bottom: 20px" class="form-control" required></textarea>
+                    <textarea placeholder="Exprimez-vous, {{ Auth::user()->name  }}" name="content" id="content" rows="10" cols="80" style="margin-bottom: 20px" class="form-control" required></textarea>
 
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                   aria-describedby="inputGroupFileAddon01">
-                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
-                    </div>
+
+
+                        <input type="file"  >
+
+
+                <div>
+                    <br />
+                    <label class="mr-sm-2" for="inputState">Preference</label>
+                    <br />
+                    <select id="inputState" class="form-control">
+                        <option value="null">Choisir catégorie ...  </option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Poster!</button>
 
-                </div>
+
+
 
             </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Poster!</button>
+
+            </div>
         </div>
     </div>
 </div>
+
+
+
 
