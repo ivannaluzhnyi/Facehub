@@ -29,7 +29,7 @@
                                     <td>
 
 
-                                        <a href="/categories/delete/{{$category->id}}"><i class="fas fa-trash"></i></a>
+                                        <a href="/categories/delete/{{$category->id}}"><i class="fas fa-trash">- supprimer</i></a>
 
                                     </td>
                                 @endauth
@@ -67,7 +67,7 @@
                             </div>
 
 
-                            <div class="form-group row">
+                            <div class="form-group row" >
                                 <label for="slug" class="col-md-4 col-form-label text-md-right">{{ __('Slug') }}</label>
 
                                 <div class="col-md-6">
@@ -81,8 +81,8 @@
 
                                     @if ($errors->has('slug'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('slug') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('slug') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>

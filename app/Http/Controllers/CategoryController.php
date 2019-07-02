@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $category->save();
 
         $request->session()->flash('status_success', 'Catégorie été ajouté');
-        return redirect()->route('categories');
+        return redirect()->route('show_category');
     }
 
     public function delete(Request $request)
@@ -61,9 +61,9 @@ class CategoryController extends Controller
 
         if($category[0]->user_id == Auth::id()){
             Category::destroy($request->id);
-            $request->session()->flash('status_danger', 'Message supprimé');
+            $request->session()->flash('status_danger', 'Categorie supprimé');
             return redirect()->route('categories');
         }
-        return redirect()->route('categories');
+        return redirect()->route('show_category');
     }
 }

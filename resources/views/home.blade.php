@@ -49,7 +49,7 @@
                     You are logged in!
 
 
-
+{{--{{dd($posts)}}--}}
 
 
 
@@ -80,41 +80,68 @@
                 </button>
             </div>
 
-            <form action="">
+            <form method="POST" action="{{route('posts')}}" enctype="multipart/form-data">
+                @csrf
+
                 <div class="modal-body form-group ">
 
-                    <input placeholder="Titre" type="text" class="form-control" style="margin-bottom: 20px">
+                    <input name="title" placeholder="Titre" type="text" class="form-control" style="margin-bottom: 20px">
+                        @if ($errors->has('title'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('title') }}</strong>
+                            </span>
+                        @endif
                     <textarea placeholder="Exprimez-vous, {{ Auth::user()->name  }}" name="content" id="content" rows="10" cols="80" style="margin-bottom: 20px" class="form-control" required></textarea>
+                        @if ($errors->has('content'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('content') }}</strong>
+                            </span>
+                        @endif
 
 
+                    <input name="file" type="file"  >
+                        @if ($errors->has('file'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('file') }}</strong>
+                            </span>
+                        @endif
 
-                        <input type="file"  >
+                    <div class="form-group">
+                        <br />
+                        <label class="mr-sm-2" for="inputState">Preference</label>
+                        <br />
+                        <select name="category" id="inputState" class="form-control">
+                            <option value="null">Choisir catégorie ...  </option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="slug" class=" text-md-left">{{ __('Slug') }}</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">/</div>
+                                </div>
+                                <input type="text" name="slug"  class="form-control" id="slug">
+                            </div>
 
-                <div>
-                    <br />
-                    <label class="mr-sm-2" for="inputState">Preference</label>
-                    <br />
-                    <select id="inputState" class="form-control">
-                        <option value="null">Choisir catégorie ...  </option>
-                        @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>
+                            @if ($errors->has('slug'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('slug') }}</strong>
+                                </span>
+                            @endif
+                    </div>
+
                 </div>
 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Poster!</button>
                 </div>
-
-
-
 
             </form>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Poster!</button>
-
-            </div>
         </div>
     </div>
 </div>

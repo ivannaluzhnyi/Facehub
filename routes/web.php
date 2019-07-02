@@ -29,7 +29,7 @@ Route::get('/page/{param?}', function ($param = null) {
 
 
 // Category
-Route::get('/categories','CategoryController@index')->middleware('auth');
+Route::get('/categories','CategoryController@index')->middleware('auth')->name('show_category');
 Route::post('/categories','CategoryController@create')->middleware('auth')->name('categories');
 Route::get('/categories/delete/{id}', 'CategoryController@delete')->middleware('auth');
 
@@ -45,6 +45,10 @@ Route::post('register', '\App\Http\Controllers\Auth\RegisterController@create');
 Route::get('/', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
+
+// POSTS
+
+Route::post('/','HomeController@create')->middleware('auth')->name('posts');
 
 
 //Route::get('/', 'PostController@index')->name('home');
