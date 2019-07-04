@@ -61,21 +61,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form runat="server">
+                    <form method="POST" runat="server" action="{{ route('SettingsImage') }}">
+                    @csrf <!-- {{ csrf_field() }} -->
                         <center><img id="blah" src="#" alt="your image" height="300" width="300" /><center><br>
-                        <input type='file' id="imgInp" /><br>
+                        <input name='avatar' type='file' id="imgInp" /><br>
+                                <input id="profile_image" type="file" class="form-control" name="profile_image">
                                 <button type="submit" class="btn btn-primary">Changer</button>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Changer</button>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Changer</button>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
