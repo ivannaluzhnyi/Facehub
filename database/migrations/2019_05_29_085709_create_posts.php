@@ -19,13 +19,15 @@ class CreatePosts extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('name');
             $table->string('img');
-            $table->string('slug');
+            $table->bigInteger('slug_id')->unsigned();
             $table->longText('content');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('slug_id')->references('id')->on('slugs');
         });
+
     }
 
     /**

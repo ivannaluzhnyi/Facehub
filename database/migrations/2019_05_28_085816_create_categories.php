@@ -17,9 +17,15 @@ class CreateCategories extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name');
-            $table->string('slug');
+            $table->bigInteger('slug_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+
+            $table->foreign('slug_id')->references('id')->on('slugs');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('posts_count')->unsigned()->default(0);
         });
+
+
     }
 
     /**
