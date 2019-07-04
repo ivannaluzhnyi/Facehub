@@ -33,6 +33,17 @@ Route::get('/categories','CategoryController@index')->middleware('auth')->name('
 Route::post('/categories','CategoryController@create')->middleware('auth')->name('categories');
 Route::get('/categories/delete/{id}', 'CategoryController@delete')->middleware('auth');
 
+Route::get('/categories/{slug}', 'CategoryController@show')->name('category.show')->where('slug', $slugPattern);
+
+// POSTS
+
+Route::post('/','HomeController@create')->middleware('auth')->name('posts');
+Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
+
+// COMMENT
+
+Route::post('', 'CommentController@create')->name('add_comment');
+
 //Auth::routes();
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -46,17 +57,14 @@ Route::get('/', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
 
-// POSTS
-
-Route::post('/','HomeController@create')->middleware('auth')->name('posts');
 
 
 //Route::get('/', 'PostController@index')->name('home');
-Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
-Route::get('/category/{slug}', 'PostController@category')->name('posts.category')->where('slug', $slugPattern);
+
+
 Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id', '[0-9]+');
 
-Route::resource('comments', 'CommentController', ['only' => ['store']]);
+
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
     Route::resource('posts', 'PostController');

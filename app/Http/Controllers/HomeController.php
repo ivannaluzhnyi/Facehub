@@ -30,13 +30,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->get();
-        $post = DB::table('posts')
+        $categories = DB::table('categories')
+            ->join('slugs','categories.slug_id',"=",'slugs.id')
+            ->select('categories.id','categories.name','categories.created_at', 'categories.user_id','slugs.name as slug_name') ->get();
+        $posts = DB::table('posts')
             ->join('slugs','posts.slug_id',"=",'slugs.id')
             ->join('categories','posts.category_id',"=",'categories.id')
-            ->select('posts.id','posts.name','posts.content','slugs.name as slug_name', 'categories.name as categories_name','posts.created_at')
+            ->join('users','posts.user_id',"=",'users.id')
+            ->select('posts.id','posts.name','posts.img','posts.content','slugs.name as slug_name','users.name as user_name', 'categories.name as categories_name','posts.created_at')
             ->get();
-        return view('home')->with('categories',$categories)->with('posts',$post);
+        return view('home')->with('categories',$categories)->with('posts',$posts);
     }
 
     public function validator(array $data)
@@ -63,7 +66,7 @@ class HomeController extends Controller
 
             $originalImage= $request->file('file');
             $fileName = rand(1111,9999).time().'.'.$originalImage->getClientOriginalExtension();
-            $org_path = 'upload_posts' . $fileName;
+            $org_path = 'upload_posts/' . $fileName;
 
             Image::make($originalImage->getRealPath())->fit(900, 500, function ($constraint) {
                 $constraint->upsize();

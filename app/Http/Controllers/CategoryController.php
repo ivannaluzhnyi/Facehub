@@ -66,4 +66,20 @@ class CategoryController extends Controller
         }
         return redirect()->route('show_category');
     }
+
+    public function show($slug)
+    {
+        $slug = Slug::where('name', $slug)->first();
+        if($slug === null) return redirect('/');
+        $category = Category::where('slug_id',$slug->id)->first();
+        $posts = DB::table('posts')
+            ->join('slugs','posts.slug_id',"=",'slugs.id')
+            ->join('categories','posts.category_id',"=",'categories.id')
+            ->join('users','posts.user_id',"=",'users.id')
+            ->where('posts.category_id',$category->id)
+            ->select('posts.id','posts.name','posts.img','posts.content','slugs.name as slug_name','users.name as user_name', 'categories.name as categories_name','posts.created_at')
+            ->get();
+
+        return view('categories.show')->with('category',$category)->with('posts', $posts);
+    }
 }

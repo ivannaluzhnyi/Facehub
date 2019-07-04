@@ -3,24 +3,30 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-2">
-            <h3><a href="{{ url('/categories') }}">Categories</a></h3>
-{{--            <a class="btn btn-outline-success" href="">Tout les categories</a>--}}
-            <ul>
-                @if(isset($categories))
-                    <?php  $limit = 0?>
-                    @foreach($categories as $category)
-                        @if($limit === 3) @break @endif
-                        <li>{{$category->name}}</li>
-                        <?php ++$limit ?>
-                    @endforeach
-                        <br>
-                        <a href="{{ url('/categories') }}"><small>Plus de categories...</small></a>
-                @endif
-            </ul>
+        <div class="col-3">
+         <div class="card">
+             <div class="card-header" style="text-align: center">
+                 <h3><a href="{{ url('/categories') }}">Categories</a></h3>
+                 {{--            <a class="btn btn-outline-success" href="">Tout les categories</a>--}}
+             </div>
+             <div class="card-body">
+                 <ul >
+                     @if(isset($categories))
+                         <?php  $limit = 0?>
+                         @foreach($categories as $category)
+                             @if($limit === 3) @break @endif
+                             <li><a href="categories/{{$category->slug_name}}">{{$category->name}}</a> </li>
+                             <?php ++$limit ?>
+                         @endforeach
+                         <br>
+                         <a href="{{ url('/categories') }}"><small>Plus de categories...</small></a>
+                     @endif
+                 </ul>
+             </div>
+         </div>
         </div>
 
-        <div class="col-8">
+        <div class="col-7">
             <div class="card">
                 <div class="card-header">Poster un article</div>
 
@@ -42,19 +48,43 @@
                 </div>
             </div>
 
-            <div style="margin-top: 25px" class="card" >
+            <div style="margin-top: 25px; padding: 0" class="card" >
 
-                <div class="card-body">
-
-                    You are logged in!
-
-
-{{--{{dd($posts)}}--}}
-
-
-
+                <div class="card-header">
+                    <h5 class="my-1">Les Posts
+                    </h5>
                 </div>
             </div>
+
+            @foreach($posts as $post)
+                <div class="col-auto" style="margin-top: 25px" >
+                        <!-- Blog Post -->
+                        <div class="card mb-4">
+                            @if($post->img)
+                                <img class="card-img-top" src="{{'upload_posts/'.$post->img }}" alt="Card image cap">
+                            @endif
+                            <div class="card-body">
+                                <h2 class="card-title">{{$post->name}}</h2>
+                                <p class="card-text">{{$post->content}}</p>
+                                <a href="{{url($post->slug_name)}}" class="btn btn-primary">Read More &rarr;</a>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between text-muted">
+                                <p>
+                                    Posté le {{ date('d/m/Y', strtotime($post->created_at))  }} par {{$post->user_name}}
+                                </p>
+                                <p class="align-text-top">
+                                    qqsd
+                                </p>
+                            </div>
+                        </div>
+
+                </div>
+
+            @endforeach
+
+
+
+
         </div>
 
         <div class="col-2">
@@ -62,6 +92,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 <script>
