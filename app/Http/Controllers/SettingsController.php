@@ -9,6 +9,12 @@ class SettingsController
     public function index()
     {
 
+
+        return view('settings.index');
+    }
+    public function changePicture()
+    {
+dd();
         return view('settings.index');
     }
 }

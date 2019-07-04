@@ -41,7 +41,7 @@ Route::post('/wall/write', 'WallController@write');
 
 Route::get('/profil/{param?}', 'ProfilController@index')->name('profil');
 Route::get('/settings', 'SettingsController@index');
-
+Route::post('/settings', 'SettingsController@index');
 Route::get('/', 'PostController@index')->name('home');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
 Route::get('/category/{slug}', 'PostController@category')->name('posts.category')->where('slug', $slugPattern);
