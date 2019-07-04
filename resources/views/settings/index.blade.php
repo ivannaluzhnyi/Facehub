@@ -61,12 +61,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" runat="server" action="{{ route('SettingsImage') }}">
-                    @csrf <!-- {{ csrf_field() }} -->
-                        <center><img id="blah" src="#" alt="your image" height="300" width="300" /><center><br>
-                        <input name='avatar' type='file' id="imgInp" /><br>
-                                <input id="profile_image" type="file" class="form-control" name="profile_image">
-                                <button type="submit" class="btn btn-primary">Changer</button>
+
+                    <form enctype="multipart/form-data" method="post" action="{{route('SettingsImage')}}">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="imageInput">File input</label>
+                            <input data-preview="#preview" name="input_img" type="file" id="imgInp">
+                            <img class="col-sm-6" id="preview"  src="">
+                            <img id="blah" src="#" alt="your image" height="300" width="300"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="submit">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

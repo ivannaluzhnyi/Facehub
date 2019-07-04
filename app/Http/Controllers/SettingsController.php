@@ -3,7 +3,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
+use Illuminate\Mail\Mailer;
+use \Auth;
+
 
 class SettingsController
 {
@@ -16,19 +21,25 @@ class SettingsController
     public function image(Request $request)
     {
 
-        if ($request->has('profile_image')) {
-            // Get image file
-            $image = $request->file('profile_image');
-            // Make a image name based on user name and current timestamp
-            $name = str_slug($request->input('name')).'_'.time();
-            // Define folder path
-            $folder = '/uploads/images/';
-            // Make a file path where image will be stored [ folder path + file name + file extension]
-            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
-            // Upload image
-            $this->uploadOne($image, $folder, 'public', $name);
-            // Set user profile image path in database to filePath
-            $user->profile_image = $filePath;
+        if ($request->hasFile('input_img')) {
+
+            $a=Auth::user()->avatar;
+            $picture=substr($a,0,-4);
+            $image = $request->file('input_img');
+            $name = $picture.'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('images/thumbnails/');
+            $image->move($destinationPath, $name);
+          //  $this->save();
+
+
+            return back()->with('success','Image Upload successfully');
         }
+
+    }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'input_img' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+        ]);
     }
 }
