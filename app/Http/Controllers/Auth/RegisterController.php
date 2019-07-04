@@ -93,13 +93,13 @@ class RegisterController extends Controller
             $img_dir = $fileName;
         }
 
-         User::create([
-             'name' => $request['name'],
-             'email' => $request['email'],
-             'avatar' => $img_dir,
-             'date_of_birth' => $request['date_of_birth'],
-             'password' => Hash::make($request['password']),
-         ]);
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'avatar' => $img_dir,
+            'date_of_birth' => $request['date_of_birth'],
+            'password' => Hash::make($request['password']),
+        ]);
 
         return redirect()->back()->with(['status' => 'Utilisateur ajouté.']);
     }

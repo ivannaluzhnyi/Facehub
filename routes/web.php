@@ -24,7 +24,6 @@ Route::get('/hello', function () {
 
 Route::get('/page/{param?}', function ($param = null) {
     return view('page', ['word'=>$param]);
-
 });
 
 
@@ -57,6 +56,8 @@ Route::get('/', 'HomeController@index')->middleware('auth')->name('home');
 Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
 
+Route::get('/profil/{param?}', 'ProfilController@index')->name('profil');
+Route::get('/settings', 'SettingsController@index');
 
 
 //Route::get('/', 'PostController@index')->name('home');

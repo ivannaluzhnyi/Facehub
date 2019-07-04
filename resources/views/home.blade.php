@@ -27,6 +27,7 @@
         </div>
 
         <div class="col-7">
+
             <div class="card">
                 <div class="card-header">Poster un article</div>
 
@@ -41,10 +42,7 @@
                         <img  src="images/thumbnails/{{Auth::user()->avatar }} " class="col-2 rounded float-left img-thumbnail" style="height: 60px; width: 80px !important; padding: 0 !important" alt="... thumbnail">
 
                         <textarea data-toggle="modal" data-target="#addPostModal"  placeholder="Exprimez-vous, {{ Auth::user()->name  }}" style="margin: auto" class=" col-8 form-control" name="" id="" cols="30" rows="4"></textarea>
-
                     </div>
-
-
                 </div>
             </div>
 
@@ -82,15 +80,13 @@
 
             @endforeach
 
-
-
-
         </div>
 
         <div class="col-2">
             sqdqs
         </div>
     </div>
+
 </div>
 
 @endsection
@@ -101,15 +97,16 @@
 </script>
 
 
-<div class="modal fade" id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Poster un article</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+    {{--MODAL TO ADD POST--}}
+    <div class="modal fade" id="addPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Poster un article</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
             <form method="POST" action="{{route('posts')}}" enctype="multipart/form-data">
                 @csrf
@@ -172,10 +169,12 @@
                     <button type="submit" class="btn btn-primary">Poster!</button>
                 </div>
 
-            </form>
+
+                </form>
+            </div>
         </div>
     </div>
-</div>
+@endsection
 
 
 
