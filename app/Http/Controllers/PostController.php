@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Slug;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -34,9 +36,15 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->first();
-        $comment = new Comment(['post_id' => $post->id]);
-        return view('posts.show', compact('post', 'comment'));
+        $categories = DB::table('categories')
+            ->join('slugs','categories.slug_id',"=",'slugs.id')
+            ->select('categories.id','categories.name','categories.created_at', 'categories.user_id','slugs.name as slug_name') ->get();
+        $slug = Slug::where('name', $slug)->first();
+        if($slug === null) return redirect('/');
+        $post = Post::where('slug_id',$slug->id)->first();
+        $user = User::where('id',$post->user_id)->first();
+//        $comment = new Comment(['post_id' => $post->id]);
+        return view('posts.show')->with('categories',$categories)->with('post',$post)->with('user',$user);
     }
 
 }

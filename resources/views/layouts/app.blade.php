@@ -78,6 +78,13 @@
         </div>
     </div>
 
+    <footer  class="py-2 bg-dark fixed-bottom">
+        <div class="container">
+            <p class=" text-center text-white">Copyright &copy; FACEHUB 2019</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>

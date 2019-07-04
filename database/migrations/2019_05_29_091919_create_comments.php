@@ -19,7 +19,9 @@ class CreateComments extends Migration
             $table->string('username');
             $table->string('email');
             $table->bigInteger('post_id')->unsigned();
+            $table->bigInteger('user_id')->nullable();
             $table->longText('content');
+
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
