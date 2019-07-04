@@ -59,13 +59,9 @@ Route::post('/wall/write', 'WallController@write');
 Route::get('/profil/{param?}', 'ProfilController@index')->name('profil');
 Route::get('/settings', 'SettingsController@index');
 
-
 //Route::get('/', 'PostController@index')->name('home');
 
-
 Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id', '[0-9]+');
-
-
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
     Route::resource('posts', 'PostController');
