@@ -59,14 +59,13 @@ Route::post('/wall/write', 'WallController@write');
 Route::get('/profil/{param?}', 'ProfilController@index')->name('profil');
 Route::get('/settings', 'SettingsController@index');
 
-Route::get('/', 'PostController@index')->name('home');
-Route::post('/settings', 'SettingsController@image')->name('SettingsImage');
-Route::get('/', 'PostController@index')->name('home');
-Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
-Route::get('/category/{slug}', 'PostController@category')->name('posts.category')->where('slug', $slugPattern);
-Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id', '[0-9]+');
+
+//Route::get('/', 'PostController@index')->name('home');
+
 
 Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id', '[0-9]+');
+
+
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
     Route::resource('posts', 'PostController');
