@@ -75,7 +75,7 @@
                                     Posté le {{ date('d/m/Y', strtotime($post->created_at))  }} par {{$post->user_name}}
                                 </p>
                                 <p class="align-text-top">
-                                    qqsd
+                                    Categorie: {{$post->categories_name}}
                                 </p>
                             </div>
                         </div>

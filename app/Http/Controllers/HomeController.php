@@ -40,7 +40,6 @@ class HomeController extends Controller
             ->select('posts.id','posts.name','posts.img','posts.content','slugs.name as slug_name','users.name as user_name', 'categories.name as categories_name','posts.created_at')
             ->get();
 
-//        dd($posts);
         return view('home')->with('categories',$categories)->with('posts',$posts);
     }
 
