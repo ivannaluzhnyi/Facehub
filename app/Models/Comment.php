@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 25 Jun 2019 17:59:04 +0000.
+ * Date: Fri, 05 Jul 2019 15:49:47 +0000.
  */
 
 namespace App\Models;
@@ -18,6 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $username
  * @property string $email
  * @property int $post_id
+ * @property int $user_id
  * @property string $content
  * 
  * @property \App\Models\Post $post
@@ -27,13 +28,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Comment extends Eloquent
 {
 	protected $casts = [
-		'post_id' => 'int'
+		'post_id' => 'int',
+		'user_id' => 'int'
 	];
 
 	protected $fillable = [
 		'username',
 		'email',
 		'post_id',
+		'user_id',
 		'content'
 	];
 

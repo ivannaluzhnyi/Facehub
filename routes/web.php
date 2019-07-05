@@ -29,32 +29,32 @@ Route::get('/page/{param?}', function ($param = null) {
 
 
 // Category
-Route::get('/categories','CategoryController@index')->middleware('auth')->name('show_category');
-Route::post('/categories','CategoryController@create')->middleware('auth')->name('categories');
-Route::get('/categories/delete/{id}', 'CategoryController@delete')->middleware('auth');
+Route::get('/categories','CategoryController@index')->name('show_category');
+Route::post('/categories','CategoryController@create')->name('categories');
+Route::get('/categories/delete/{id}', 'CategoryController@delete');
 
 Route::get('/categories/{slug}', 'CategoryController@show')->name('category.show')->where('slug', $slugPattern);
 
 // POSTS
-Route::get('/', 'HomeController@index')->middleware('auth')->name('home');
-Route::post('/','HomeController@create')->middleware('auth');
+Route::get('/', 'HomeController@index')->name('home');
+Route::post('/','HomeController@create');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
 
 // COMMENT
 
-//Route::post('', 'CommentController@create')->name('add_comment');
+Route::post('', 'CommentController@create')->name('add_comment');
 
 //Auth::routes();
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+//Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+//Route::post('login', 'Auth\LoginController@login');
+//Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', '\App\Http\Controllers\Auth\RegisterController@create');
+//Route::post('register', '\App\Http\Controllers\Auth\RegisterController@create');
 
 
-Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
+//Route::get('/wall/delete/{id_message}', 'WallController@delete')->middleware('auth');
 Route::post('/wall/write', 'WallController@write');
 
 
@@ -69,3 +69,4 @@ Route::get('/user/{id}', 'PostController@user')->name('posts.user')->where('id',
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
     Route::resource('posts', 'PostController');
 });
+Auth::routes();

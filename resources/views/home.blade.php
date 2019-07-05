@@ -36,11 +36,12 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
+{{--                            {{ dd(Auth::user()) }}--}}
                         <div class="row">
-                            <img  src="images/thumbnails/{{Auth::user()->avatar }} " class="col-2 rounded float-left img-thumbnail" style="height: 60px; width: 80px !important; padding: 0 !important" alt="... thumbnail">
-
-                            <textarea data-toggle="modal" data-target="#addPostModal"  placeholder="Exprimez-vous, {{ Auth::user()->name  }}" style="margin: auto" class=" col-8 form-control" name="" id="" cols="30" rows="4"></textarea>
+                            @auth
+                                <img  src="images/thumbnails/{{Auth::user()->avatar }} " class="col-2 rounded float-left img-thumbnail" style="height: 60px; width: 80px !important; padding: 0 !important" alt="... thumbnail">
+                            @endauth
+                            <textarea data-toggle="modal" data-target="#addPostModal"  placeholder="Exprimez-vous," style="margin: auto" class=" col-8 form-control" name="" id="" cols="30" rows="4"></textarea>
 
                         </div>
 
@@ -56,7 +57,7 @@
                     </div>
                 </div>
 
-{{--                {{ dd($posts) }}--}}
+
 
                 @foreach($posts as $post)
                     <div class="col-auto" style="margin-top: 25px" >
@@ -124,7 +125,8 @@
                                 <strong>{{ $errors->first('title') }}</strong>
                             </span>
                     @endif
-                    <textarea placeholder="Exprimez-vous, {{ Auth::user()->name  }}" name="content" id="content" rows="10" cols="80" style="margin-bottom: 20px" class="form-control" required></textarea>
+{{--                    {{ Auth::user()->name  }}--}}
+                    <textarea placeholder="Exprimez-vous," name="content" id="content" rows="10" cols="80" style="margin-bottom: 20px" class="form-control" required></textarea>
                     @if ($errors->has('content'))
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('content') }}</strong>

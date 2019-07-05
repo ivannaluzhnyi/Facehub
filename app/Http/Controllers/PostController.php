@@ -42,9 +42,19 @@ class PostController extends Controller
         $slug = Slug::where('name', $slug)->first();
         if($slug === null) return redirect('/');
         $post = Post::where('slug_id',$slug->id)->first();
+
+//        $comment = Comment::where('post_id',$post->id)->get();
+
+        $comment = DB::table('comments')
+            ->join('users','comments.user_id','=','users.id')
+            ->select('comments.id','comments.content','comments.created_at','comments.anonyme','users.name as user_name')
+            ->where('comments.post_id', '=',$post->id)
+            ->get();
+
+
         $user = User::where('id',$post->user_id)->first();
 //        $comment = new Comment(['post_id' => $post->id]);
-        return view('posts.show')->with('categories',$categories)->with('post',$post)->with('user',$user);
+        return view('posts.show')->with('categories',$categories)->with('post',$post)->with('user',$user)->with('comments', $comment);
     }
 
 }
