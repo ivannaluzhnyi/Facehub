@@ -29,15 +29,17 @@
         <nav class="navbar fixed-top navbar-dark bg-dark">
             <a class="navbar-brand" href="{{ url('/home') }}">FaceHub</a>
 
-            <div class="nav navbar-nav navbar-right">
+               <div class="nav navbar-nav navbar-right">
                 <a href="{{ url('/profil') }}"> Mon profil </a>
             </div>
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name  }}  <span class="caret"></span>
-                    </a>
+                    @auth
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name  }} <span class="caret"></span>
+                        </a>
+                    @endauth
 
                     <ul class="dropdown-menu" role="menu" style="padding: 0">
                         <li class="justify-content-center">
@@ -47,9 +49,11 @@
                                 Logout
                             </a>
 
-                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
+                            @auth
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                </form>
+                            @endauth
                         </li>
                     </ul>
                 </li>
