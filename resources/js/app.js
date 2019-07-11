@@ -7,7 +7,10 @@
 
 require('./bootstrap');
 
+
+
 window.Vue = require('vue');
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,8 +31,51 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+Vue.component('chat-messages', require('./components/ChatMessages.vue'));
+Vue.component('chat-form', require('./components/ChatForm.vue'));
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    data: {
+        messages: []
+    },
+
+    props: ['messages'],
+
+    created() {
+        this.fetchMessages();
+    },
+
+    methods: {
+        fetchMessages() {
+            axios.get('/messages').then(response => {
+                this.messages = response.data;
+            });
+        },
+
+
+
+        addMessage(message) {
+            this.messages.push(message);
+
+            axios.post('/messages', message).then(response => {
+                console.log(response.data);
+            });
+        }
+    }
 });
+
+Echo.private('chat')
+    .listen('MessageSent', (e) => {
+        this.messages.push({
+            message: e.message.message,
+            user: e.user
+        });
+    });
+
+
+
 
 

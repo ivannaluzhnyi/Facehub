@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Slug;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,9 @@ class HomeController extends Controller
             ->select('posts.id','posts.name','posts.img','posts.content','slugs.name as slug_name','users.name as user_name', 'categories.name as categories_name','posts.created_at')
             ->get();
 
-        return view('home')->with('categories',$categories)->with('posts',$posts);
+        $users = User::all();
+
+        return view('home')->with('categories',$categories)->with('posts',$posts)->with('users',$users);
     }
 
     public function validator(array $data)
@@ -54,7 +57,7 @@ class HomeController extends Controller
 
     public function create(Request $request)
     {
-        $user_id = Auth::user()->id;
+        $user_id = 1 ;// Auth::user()->id;
         $this->validator(array($request));
 
         $slug = new Slug();

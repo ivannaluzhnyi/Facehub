@@ -24,6 +24,24 @@
                         </ul>
                     </div>
                 </div>
+                <hr>
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        <h3>Utilisateurs</h3>
+                        {{--            <a class="btn btn-outline-success" href="">Tout les categories</a>--}}
+                    </div>
+                    <div class="card-body">
+                        <ul >
+                            @if(isset($users))
+                                <?php  $limit = 0?>
+                                @foreach($users as $user)
+                                    <li><a href="user/{{$user->id}}">{{$user->name}}</a> </li>
+                                @endforeach
+                                <br>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="col-7">
@@ -114,7 +132,7 @@
                 </button>
             </div>
 
-            <form method="POST" action="{{route('home')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('add_post')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="modal-body form-group ">

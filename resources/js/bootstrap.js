@@ -1,6 +1,15 @@
 
 window._ = require('lodash');
 
+import Echo from "laravel-echo"
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'b11c949ad5de2ecf454a',
+    cluster: 'eu',
+    encrypted: true
+});
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This

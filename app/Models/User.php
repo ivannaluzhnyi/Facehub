@@ -8,6 +8,7 @@
 namespace App\Models;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
+use App\Message;
 
 /**
  * Class User
@@ -55,6 +56,11 @@ class User extends Eloquent
 	{
 		return $this->hasMany(\App\Models\Category::class);
 	}
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 
 	public function posts()
 	{

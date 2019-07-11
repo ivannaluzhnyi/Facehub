@@ -1,33 +1,27 @@
 <?php
 
-/**
- * Created by Reliese Model.
- * Date: Tue, 07 May 2019 09:59:18 +0000.
- */
+namespace App;
 
-namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
-use Reliese\Database\Eloquent\Model as Eloquent;
-
-/**
- * Class Message
- * 
- * @property int $id
- * @property string $message
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property int $id_author
- *
- * @package App\Models
- */
-class Message extends Eloquent
+class Message extends Model
 {
-	protected $casts = [
-		'id_author' => 'int'
-	];
+    /**
+     * Fields that are mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = ['message'];
 
-	protected $fillable = [
-		'message',
-		'id_author'
-	];
+    /**
+     * A message belong to a user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

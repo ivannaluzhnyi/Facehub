@@ -27,6 +27,16 @@ Route::get('/page/{param?}', function ($param = null) {
 
 });
 
+// PUSGER
+
+Route::get('/', 'ChatsController@index');
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
+
+Route::get('/mes', function () {
+    return view('chat');
+});
+
 
 // Category
 Route::get('/categories','CategoryController@index')->name('show_category');
@@ -37,12 +47,12 @@ Route::get('/categories/{slug}', 'CategoryController@show')->name('category.show
 
 // POSTS
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/','HomeController@create');
+Route::post('/','HomeController@create')->name('add_post');
 Route::get('/{slug}', 'PostController@show')->name('posts.show')->where('slug', $slugPattern);
 
 // COMMENT
 
-Route::post('', 'CommentController@create')->name('add_comment');
+Route::post('comments', 'CommentController@create')->name('add_comment');
 
 //Auth::routes();
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
